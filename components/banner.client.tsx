@@ -3,7 +3,9 @@
 import React from "react";
 
 const Banner = () => {
-	const handleClick = () => {};
+	const handleClick = () => {
+		console.log("Hello World!");
+	};
 
 	return (
 		<div className="mb-12 grid lg:mb-24 lg:grid-cols-2">
