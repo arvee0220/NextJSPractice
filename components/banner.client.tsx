@@ -1,10 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Banner = () => {
+	const router = useRouter();
+
 	const handleClick = () => {
-		console.log("Hello World!");
+		const coffeeStoreRoute = "/coffee-store";
+
+		router.push(coffeeStoreRoute);
 	};
 
 	return (
