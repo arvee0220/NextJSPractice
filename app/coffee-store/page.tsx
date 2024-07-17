@@ -7,7 +7,7 @@ const Page = () => {
 	const router = useRouter();
 
 	const slugRouteHandler = () => {
-		const slugRouter = "/coffee-store/Civet";
+		const slugRouter = "/coffee-store/civet-coffee";
 
 		router.push(slugRouter);
 	};
