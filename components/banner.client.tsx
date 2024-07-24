@@ -28,7 +28,7 @@ const Banner = () => {
 					<button onClick={handleClick}>View stores nearby</button>
 				</div>
 			</div>
-			<div className="absolute top-2 z-10 md:top-10 md:mt-12 md:pl-10 md:pt-0 lg:right-1/4 lg:flex lg:pl-20">
+			<div className="absolute top-2 z-10 md:top-10 md:mt-12 md:pl-10 md:pt-0 lg:right-[20%] lg:flex lg:pl-20 -scale-x-100">
 				{" "}
 				<Image
 					src="/static/hero-image1.png"
