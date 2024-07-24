@@ -1,10 +1,19 @@
+import { fetchCoffeeStore } from "@/lib/coffee-stores";
 import Link from "next/link";
 import React from "react";
 
-const Page = (props: { params: { id: string } }) => {
+async function getData(id: string) {
+	return await fetchCoffeeStore(id);
+}
+
+const Page = async (props: { params: { id: string } }) => {
 	const {
 		params: { id },
 	} = props;
+
+	const coffeeStores = await getData(id);
+
+	console.log({ coffeeStores });
 
 	return (
 		<div className="h-full pb-80">

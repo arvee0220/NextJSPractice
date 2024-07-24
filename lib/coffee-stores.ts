@@ -1,6 +1,5 @@
 import { MapboxType } from "@/types";
 
-
 const transformCoffeeData = (res: MapboxType) => {
 	return {
 		id: res.id,
@@ -23,3 +22,5 @@ export const fetchCoffeeStores = async () => {
 		console.error(`Error while fetching coffee stores`, error);
 	}
 };
+
+export const fetchCoffeeStore = async (id: string) => {};
