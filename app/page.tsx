@@ -43,7 +43,7 @@ export default async function Home() {
 			<main className="mx-auto mt-10 max-w-6xl px-4">
 				<Banner />
 				<div className="mt-20">
-					<h2 className="mt-8 pb-8 text-4xl font-bold text-white">BGC Stores</h2>
+					<h2 className="mt-8 pb-8 text-4xl font-bold text-slate-500">BGC Stores</h2>
 				</div>
 				<div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-6">
 					{coffeeStores.map(({ name, imgUrl, address, id }: CoffeeStoreType) => (

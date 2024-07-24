@@ -12,7 +12,7 @@ const config: Config = {
 				ibmPlexSans: ["var(--font--ibmPlexSans)"],
 			},
 			backgroundImage: {
-				gradient: "url('/static/background.png')",
+				gradient: "url('/static/background1.png')",
 			},
 			colors: {
 				purple: {
