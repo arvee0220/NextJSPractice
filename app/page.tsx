@@ -14,6 +14,7 @@ export default async function Home() {
 
 	console.log(coffeeStores);
 
+	// Temporary placeholder
 	const coffeeStores1 = [
 		{
 			id: "sample_ID",
