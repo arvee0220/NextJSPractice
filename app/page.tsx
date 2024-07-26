@@ -1,7 +1,5 @@
 import Banner from "@/components/banner.client";
 import Card from "@/components/card.server";
-import Image from "next/image";
-import Link from "next/link";
 import { fetchCoffeeStores } from "@/lib/coffee-stores";
 import { CoffeeStoreType } from "@/types";
 
@@ -11,8 +9,6 @@ async function getData() {
 
 export default async function Home() {
 	const coffeeStores = await getData();
-
-	console.log(coffeeStores);
 
 	// Temporary placeholder
 	const coffeeStores1 = [
@@ -36,8 +32,6 @@ export default async function Home() {
 		},
 	];
 
-	const coffeeStoreId = "civet-coffee";
-
 	return (
 		<div className="mb-56">
 			<main className="mx-auto mt-10 max-w-6xl px-4">
@@ -53,6 +47,7 @@ export default async function Home() {
 							imgUrl={imgUrl}
 							address={address}
 							href={`/coffee-store/${id}`}
+							alt={`Image of ${name}`}
 						/>
 					))}
 				</div>

@@ -1,4 +1,5 @@
 import { fetchCoffeeStore } from "@/lib/coffee-stores";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -11,9 +12,11 @@ const Page = async (props: { params: { id: string } }) => {
 		params: { id },
 	} = props;
 
-	const coffeeStores = await getData(id);
+	const coffeeStore = await getData(id);
 
-	console.log({ coffeeStores });
+	const { name = "", address = "", imgUrl = "" } = coffeeStore;
+
+	console.log({ coffeeStore });
 
 	return (
 		<div className="h-full pb-80">
@@ -22,6 +25,11 @@ const Page = async (props: { params: { id: string } }) => {
 				<div className="mb-2 mt-24 text-lg font-bold">
 					<Link href="/">← Back to Home</Link>
 				</div>
+				<div>
+					<h1>{name}</h1>
+				</div>
+				<Image src={imgUrl} width={740} height={360} alt={name} />
+				{address && <p>{address}</p>}
 			</div>
 		</div>
 	);
