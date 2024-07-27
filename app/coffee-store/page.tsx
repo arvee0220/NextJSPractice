@@ -1,5 +1,4 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -7,7 +6,7 @@ const Page = () => {
 	const router = useRouter();
 
 	const slugRouteHandler = () => {
-		const slugRouter = "/coffee-store/civet-coffee";
+		const slugRouter = `/`;
 
 		router.push(slugRouter);
 	};
