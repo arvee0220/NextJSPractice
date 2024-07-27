@@ -37,7 +37,7 @@ export default async function Page(props: { params: { id: string } }) {
 		return <div>Error loading coffee store data</div>;
 	}
 
-	const { name, address, imgUrl } = coffeeStore[0];
+	const { name = "", address = "", imgUrl = "" } = coffeeStore[0];
 
 	console.log(Object.keys(coffeeStore));
 	console.log(JSON.stringify(coffeeStore, null, 2));
