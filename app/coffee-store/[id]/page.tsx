@@ -1,26 +1,50 @@
-import { fetchCoffeeStore } from "@/lib/coffee-stores";
+import { fetchCoffeeStore, fetchCoffeeStores } from "@/lib/coffee-stores";
+import { CoffeeStoreType } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 async function getData(id: string) {
-	return await fetchCoffeeStore(id);
+	try {
+		const data = await fetchCoffeeStore(id);
+		if (!data) {
+			throw new Error("Coffee store not found");
+		}
+		return data;
+	} catch (error) {
+		console.error("Error fetching coffee store data:", error);
+
+		return null;
+	}
 }
 
-const Page = async (props: { params: { id: string } }) => {
+export async function generateStaticParams() {
+	const coffeeStores = await fetchCoffeeStores();
+
+	return coffeeStores.map((coffeeStore: CoffeeStoreType) => ({
+		id: coffeeStore.id,
+	}));
+}
+
+export default async function Page(props: { params: { id: string } }) {
 	const {
 		params: { id },
 	} = props;
 
 	const coffeeStore = await getData(id);
 
-	const { name = "", address = "", imgUrl = "" } = coffeeStore;
+	if (!coffeeStore) {
+		return <div>Error loading coffee store data</div>;
+	}
 
-	console.log({ coffeeStore });
+	const { name, address, imgUrl } = coffeeStore[0];
+
+	console.log(Object.keys(coffeeStore));
+	console.log(JSON.stringify(coffeeStore, null, 2));
+	console.log("Coffeestore result: ", coffeeStore);
 
 	return (
 		<div className="h-full pb-80">
-			Coffee Store Page: {id}
 			<div className="m-auto grid max-w-full p-12 lg:max-w-6xl lg:grid-cols-2 lg:gap-4">
 				<div className="mb-2 mt-24 text-lg font-bold">
 					<Link href="/">← Back to Home</Link>
@@ -33,6 +57,4 @@ const Page = async (props: { params: { id: string } }) => {
 			</div>
 		</div>
 	);
-};
-
-export default Page;
+}

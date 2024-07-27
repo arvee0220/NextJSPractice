@@ -1,15 +1,6 @@
 import { MapboxType } from "@/types";
 
-const fetchRandomCoffeeImage = async () => {
-	try {
-	} catch (error) {
-		console.error("Error fetching random coffee image:", error);
-
-		return "";
-	}
-};
-
-const transformCoffeeData = async (res: MapboxType) => {
+const transformCoffeeData = (res: MapboxType) => {
 	return {
 		id: res.id,
 		address: res.properties?.address || "",
@@ -21,18 +12,16 @@ const transformCoffeeData = async (res: MapboxType) => {
 export const fetchCoffeeStores = async () => {
 	try {
 		const res = await fetch(
-			`https://api.mapbox.com/geocoding/v5/mapbox.places/Coffe.json?bbox=121.04488849520385%2C14.545248939154334%2C121.05714748239126%2C14.556430567276223&limit=10&proximity=ip&access_token=${process.env.MAPBOX_API}`
+			`https://api.mapbox.com/geocoding/v5/mapbox.places/Coffee.json?bbox=121.04488849520385%2C14.545248939154334%2C121.05714748239126%2C14.556430567276223&limit=10&proximity=ip&access_token=${process.env.MAPBOX_API}`
 		);
 
 		const data = await res.json();
 
-		console.log(data.features);
-
-		return data.features.map((res: MapboxType) => transformCoffeeData(res));
+		return data.features.map((res: MapboxType) => {
+			return transformCoffeeData(res);
+		});
 	} catch (error) {
 		console.error(`Error while fetching coffee stores`, error);
-
-		return [];
 	}
 };
 
@@ -46,7 +35,5 @@ export const fetchCoffeeStore = async (id: string) => {
 		return data.features.map((res: MapboxType) => transformCoffeeData(res));
 	} catch (error) {
 		console.error(`Error while fetching coffee stores`, error);
-
-		return [];
 	}
 };
