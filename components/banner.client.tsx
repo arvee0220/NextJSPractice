@@ -1,18 +1,12 @@
-"use client";
-
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { MouseEventHandler } from "react";
 
-const Banner = () => {
-	const router = useRouter();
-
-	const handleClick = () => {
-		const coffeeStoreRoute = "/coffee-store";
-
-		router.push(coffeeStoreRoute);
-	};
-
+const Banner = ({
+	handleOnClick,
+}: {
+	handleOnClick: MouseEventHandler<HTMLButtonElement> | undefined;
+}) => {
 	return (
 		<div className="mb-12 grid lg:mb-24 lg:grid-cols-2">
 			<div className="z-20 flex flex-col px-2 md:pt-12">
@@ -25,7 +19,7 @@ const Banner = () => {
 				</p>
 
 				<div className="mt-12">
-					<button onClick={handleClick}>View stores nearby</button>
+					<button onClick={handleOnClick}>View stores nearby</button>
 				</div>
 			</div>
 			<div className="absolute top-2 z-10 md:top-10 md:mt-12 md:pl-10 md:pt-0 lg:right-[20%] lg:flex lg:pl-20 -scale-x-100">

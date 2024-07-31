@@ -5,11 +5,13 @@ import Banner from "./banner.client";
 export default function NearbyCoffeeStores() {
 	const { handleTrackLocation } = useTrackLocation();
 
-	handleTrackLocation();
+	const handleOnClick = (): void => {
+		handleTrackLocation();
+	};
 
 	return (
 		<div>
-			<Banner />
+			<Banner handleOnClick={handleOnClick} />
 		</div>
 	);
 }
