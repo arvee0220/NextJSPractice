@@ -22,20 +22,27 @@ const transformCoffeeData = (idx: number, result: MapboxType, photos: Array<stri
 	};
 };
 
-export const fetchCoffeeStores = async (longLat: string) => {
+export const fetchCoffeeStores = async (longLat: string, limit: number) => {
 	try {
-		const res = await fetch(
-			`https://api.mapbox.com/geocoding/v5/mapbox.places/Coffee.json?bbox=${longLat}&limit=10&proximity=ip&access_token=${process.env.NEXT_PUBLIC_MAPBOX_API}`
-		);
+		const [lon, lat] = longLat.split("%2C").map(Number);
 
-		const data = await res.json();
+		console.log(longLat);
+
+		console.log(`lon: ${lon}, lat: ${lat}`);
+
+		const response = await fetch(
+			`https://api.mapbox.com/geocoding/v5/mapbox.places/coffee.json?country=ph&limit=${limit}&proximity=${lon}%2C${lat}&access_token=${process.env.MAPBOX_API}`
+		);
+		const data = await response.json();
 		const photos = await getListOfCoffeeStorePhotos();
+
+		console.log(data);
 
 		return data.features.map((result: MapboxType, idx: number) =>
 			transformCoffeeData(idx, result, photos)
 		);
 	} catch (error) {
-		console.error(`Error while fetching coffee stores`, error);
+		console.error("Error while fetching coffee stores", error);
 	}
 };
 

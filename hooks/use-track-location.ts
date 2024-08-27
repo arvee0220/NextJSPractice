@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 
 type PositionType = { coords: { latitude: number; longitude: number } };
 
@@ -13,7 +13,7 @@ const useTrackLocation = () => {
 		const latitude = position.coords.latitude;
 		const longitude = position.coords.longitude;
 
-		setLongLat(`${longitude}, ${latitude}`);
+		setLongLat(`${longitude}%2C${latitude}`);
 
 		setIsFindingLocation(false);
 
