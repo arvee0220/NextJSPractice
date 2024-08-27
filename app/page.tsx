@@ -5,7 +5,15 @@ import { fetchCoffeeStores } from "@/lib/coffee-stores";
 import { CoffeeStoreType } from "@/types";
 
 async function getData() {
-	return await fetchCoffeeStores();
+	try {
+		const BGC_LONGLAT =
+			"121.04488849520385%2C14.545248939154334%2C121.05714748239126%2C14.556430567276223";
+			
+		return await fetchCoffeeStores(BGC_LONGLAT);
+	} catch (error) {
+		console.error("Failed to fetch coffee stores:", error);
+		return []; // Return an empty array in case of an error
+	}
 }
 
 export default async function Home() {
