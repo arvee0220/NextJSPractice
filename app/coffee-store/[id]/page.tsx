@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-async function getData(id: string) {
+async function getData(id: string, queryId: string) {
 	try {
-		const data = await fetchCoffeeStore(id);
+		const data = await fetchCoffeeStore(id, queryId);
 		if (!data) {
 			throw new Error("Coffee store not found");
 		}
@@ -19,25 +19,32 @@ async function getData(id: string) {
 }
 
 export async function generateStaticParams() {
-	const coffeeStores = await fetchCoffeeStores();
+	const BGC_COORD =
+		"121.04488849520385%2C14.545248939154334%2C121.05714748239126%2C14.556430567276223";
+
+	const coffeeStores = await fetchCoffeeStores(BGC_COORD, 6);
 
 	return coffeeStores.map((coffeeStore: CoffeeStoreType) => ({
 		id: coffeeStore.id,
 	}));
 }
 
-export default async function Page(props: { params: { id: string } }) {
+export default async function Page(props: {
+	params: { id: string };
+	searchParams: { id: string };
+}) {
 	const {
 		params: { id },
+		searchParams: { id: queryId },
 	} = props;
 
-	const coffeeStore = await getData(id);
+	const coffeeStore = await getData(id, queryId);
 
 	if (!coffeeStore) {
 		return <div>Error loading coffee store data</div>;
 	}
 
-	const { name = "", address = "", imgUrl = "" } = coffeeStore[0];
+	const { name = "", address = "", imgUrl = "" } = coffeeStore;
 
 	console.log(Object.keys(coffeeStore));
 	console.log(JSON.stringify(coffeeStore, null, 2));
