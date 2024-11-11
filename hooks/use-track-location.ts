@@ -5,9 +5,9 @@ import { useState } from "react";
 type PositionType = { coords: { latitude: number; longitude: number } };
 
 const useTrackLocation = () => {
-	const [isFindingLocation, setIsFindingLocation] = useState(false);
-	const [longLat, setLongLat] = useState("");
-	const [locationErrorMsg, setLocationErrorMsg] = useState("");
+	const [isFindingLocation, setIsFindingLocation] = useState<boolean>(false);
+	const [longLat, setLongLat] = useState<string>("");
+	const [locationErrorMsg, setLocationErrorMsg] = useState<string>("");
 
 	function success(position: PositionType) {
 		const latitude = position.coords.latitude;
