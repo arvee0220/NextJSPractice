@@ -40,9 +40,8 @@ export default function NearbyCoffeeStores() {
 				handleOnClick={handleOnClick}
 				buttonText={isFindingLocation ? "Locating" : "View stores nearby"}
 			/>
-
+			Location: {isFindingLocation ? "Locating..." : decodeURIComponent(longLat)}
 			{locationErrorMsg && <p>Error: {locationErrorMsg}</p>}
-
 			<div className="mt-20">
 				<h2 className="mt-8 pb-8 text-4xl font-bold text-slate-500">Stores near me</h2>
 			</div>
