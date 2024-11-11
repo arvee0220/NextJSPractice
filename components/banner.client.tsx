@@ -31,7 +31,7 @@ const Banner = ({
 					width={300}
 					height={300}
 					alt="hero image"
-					priority={true}
+					priority
 				/>
 			</div>
 		</div>
