@@ -5,9 +5,10 @@ type CardType = {
 	name: string;
 	imgUrl: string;
 	href: string;
+	address: string;
 };
 
-export default function Card({ name, imgUrl, href }: CardType) {
+export default function Card({address, name, imgUrl, href }: CardType) {
 	return (
 		<Link href={href} className="m-auto rounded-xl border-gray-400 shadow-2xl">
 			<div className={`glass min-h-[200px] rounded-xl px-5 pb-5 pt-1 backdrop-blur-3xl`}>
@@ -15,6 +16,7 @@ export default function Card({ name, imgUrl, href }: CardType) {
 					<h2 className="w-64 text-ellipsis whitespace-nowrap text-xl font-bold text-wrap">
 						{name}
 					</h2>
+					<p className="text-xs">{address}</p>
 				</div>
 				<div className="relative w-full h-48">
 					<Image
@@ -28,6 +30,7 @@ export default function Card({ name, imgUrl, href }: CardType) {
 						       (max-width: 1200px) 50vw, 
 						       33vw"
 					/>
+					{/* <p>{address}</p> */}
 				</div>
 			</div>
 		</Link>

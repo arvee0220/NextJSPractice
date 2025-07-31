@@ -4,6 +4,7 @@ import Banner from "./banner.client";
 import { CoffeeStoreType } from "@/types";
 import Card from "./card.server";
 import { useEffect, useState } from "react";
+import { fetchCoffeeStores } from "@/lib/coffee-stores";
 
 export default function NearbyCoffeeStores() {
 	const { handleTrackLocation, isFindingLocation, longLat, locationErrorMsg } =
@@ -20,11 +21,14 @@ export default function NearbyCoffeeStores() {
 			if (longLat) {
 				try {
 					const limit = 10;
-					const response = await fetch(
+					/* const response = await fetch(
 						`/api/getCoffeeStoresByLocation?longLat=${longLat}&limit=${limit}`
-					);
-					const coffeeStores = await response.json();
+					); */
+					const coffeeStores = await fetchCoffeeStores(longLat, limit);
+					// const coffeeStores = await response.json();
 					setCoffeeStores(coffeeStores);
+
+					console.log("CoffeeStores: ", coffeeStores)
 				} catch (error) {
 					console.error(error);
 				}
@@ -35,7 +39,7 @@ export default function NearbyCoffeeStores() {
 	}, [longLat]);
 
 	return (
-		<div>
+		<div className="nearby-coffee-stores">
 			<Banner
 				handleOnClick={handleOnClick}
 				buttonText={isFindingLocation ? "Locating" : "View stores nearby"}
@@ -46,8 +50,9 @@ export default function NearbyCoffeeStores() {
 				<h2 className="mt-8 pb-8 text-4xl font-bold text-slate-500">Stores near me</h2>
 			</div>
 			<div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-6">
-				{coffeeStores.map(({ name, id, imgUrl }: CoffeeStoreType, idx: number) => (
+				{coffeeStores.map(({address, name, id, imgUrl }: CoffeeStoreType, idx: number) => (
 					<Card
+						address={address}
 						key={`${name}-${id}`}
 						name={name}
 						imgUrl={imgUrl}
